@@ -1,1 +1,1 @@
-# Coins-project
+# CryptoCoins-project
