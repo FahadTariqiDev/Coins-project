@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Login</title>
+    <style>
+      body {
+        background-color: #474646;
+      }
+     
+    </style>
+  </head>
+  <body>
+    <div class="topnav" id="myTopnav">
+      <a href="index.html" class="active">Home</a>
+      <a href="fav.html" target="_blank">Fav</a>
+      <a href="creat.html" target="_blank">Creat</a>
+      <a href="about_us.html" target="_blank">About us</a>
+
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <div class="login-container">
+      <div class="login-form">
+        <form action="index.html" method="post">
+          <h1>Login</h1>
+          <label for="username">username</label>
+          <input id="username" type="text" placeholder="Enter Username" />
+          <label for="password">password</label>
+          <input id="password" type="password" placeholder="Password" />
+          <input class="btn button1" type="submit" onclick="validate()" />
+        </form>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
