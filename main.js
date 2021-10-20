@@ -37,6 +37,13 @@ fetch("https://api2.binance.com/api/v3/ticker/24hr")
     for (let index = 0; index < 100; index++) {
       decrease(element[index]);
     }
+    const NCCI = JSON.parse(localStorage.getItem("NCCI"))
+    if(NCCI){
+      for (let index = 0; index < NCCI.length; index++) {
+        display(NCCI[index], logos[index], index);
+        
+      }
+    }
 
     const check = localStorage.getItem("CCI");
     let array2 = [];
@@ -145,6 +152,16 @@ function display(array, logos, id) {
       logos,
       quoteVolume_dis
     );
+    editbtn.onclick = function() {
+      edit(id,
+        array.symbol,
+        array.highPrice,
+        array.lastPrice,
+        array.priceChangePercent,
+        array.weightedAvgPrice,
+        logos,
+        quoteVolume_dis)
+          }
     like.style.backgroundColor = "#333";
     like.style.color = "#ffc100";
     like.innerText = "LIKED!";
@@ -167,8 +184,10 @@ function validate() {
   var username = document.getElementById("username").value;
   var password = document.getElementById("password").value;
   if (username == "Fahad" && password == "123") {
-    alert("Login successfully");
-    location.href = "index.html"; // Redirecting to other page.
+    location.href = "homepage_loged.html"; // Redirecting to other page.
+  }
+  else{
+    alert("Username or passwors is wrong")
   }
 }
 
@@ -335,48 +354,140 @@ function decrease(array) {
 }
 
 function create() {
-const symbol = document.getElementById("Symbel").value
-const quoteVolume = document.getElementById("quoteVolume").value
-const highprice = document.getElementById("highPrice").value
-const lastPrice = document.getElementById("lastPrice").value
-const Percent = document.getElementById("percent").value
-const img = document.getElementById("img").value
-const v = document.getElementById("weightedAvgPrice").value
-alert(symbol+" ......."+img)
+  const symbol = document.getElementById("Symbel").value;
+  const quoteVolume = document.getElementById("valume").value;
+  const highprice = document.getElementById("highPrice").value;
+  const lastPrice = document.getElementById("lastPrice").value;
+  const Percent = document.getElementById("percent").value;
+  const img = document.getElementById("img").value;
+  const v = document.getElementById("weightedAvgPrice").value;
+ 
 
-const check = localStorage.getItem("CCI");
-let array2 = [];
-let obj;
-for (let index = 0; index < 20; index++) {
-  if (check) {
-    array2 = JSON.parse(localStorage.getItem("CCI"));
-    obj = {
-      
-      symbol: symbol,
-      img: img,
-      highPrice: highprice,
-      lastPrice: lastPrice,
-      priceChangePercent: Percent,
-      weightedAvgPrice: weightedAvgPrice,
-      quoteVolume: quoteVolume,
-    };
+  const check = localStorage.getItem("NCCI");
+  let array2 = [];
+  let obj;
+  
+    if (check) {
+      array2 = JSON.parse(localStorage.getItem("NCCI"));
+      obj = {
+        symbol: symbol,
+        img: img,
+        highPrice: highprice,
+        lastPrice: lastPrice,
+        priceChangePercent: Percent,
+        weightedAvgPrice: weightedAvgPrice,
+        quoteVolume: quoteVolume,
+      };
+      array2.push(obj);
+      localStorage.setItem("NCCI", JSON.stringify(array2));
+      alert("You added ..." + symbol +" ....");
+    } else
+      obj = {
+        symbol: symbol,
+        img: img,
+        highPrice: highprice,
+        lastPrice: lastPrice,
+        priceChangePercent: Percent,
+        weightedAvgPrice: weightedAvgPrice,
+        quoteVolume: quoteVolume,
+      };
     array2.push(obj);
-    localStorage.setItem("CCI", JSON.stringify(array2));
-  } else
-  obj = {
-    
-    symbol: symbol,
-    img: img,
-    highPrice: highprice,
-    lastPrice: lastPrice,
-    priceChangePercent: Percent,
-    weightedAvgPrice: weightedAvgPrice,
-    quoteVolume: quoteVolume,
-  };
-  array2.push(obj);
-  localStorage.setItem("CCI", JSON.stringify(array2));
-}
+    localStorage.setItem("NCCI", JSON.stringify(array2));
+    alert("You added ..." + symbol +" ....");
 
-}
-function edit() {}
+  }
+
+function edit(id,
+  symbol,
+  highPrice,
+  lastPrice,
+  priceChangePercent,
+  weightedAvgPrice,
+  img,
+  quoteVolume) {
+    // const id1 = document.getElementById("id").setAttribute('value',id);
+
+    const symbol1 = document.getElementById("Symbel").setAttribute('value',symbol);
+    console.log(symbol1);
+  const quoteVolume1 = document.getElementById("valume").setAttribute('value',quoteVolume);
+  console.log(quoteVolume1);
+
+  const highprice1 = document.getElementById("highPrice").setAttribute('value',highPrice);
+  const lastPrice1 = document.getElementById("lastPrice").setAttribute('value',lastPrice);
+  const Percent1 = document.getElementById("percent").setAttribute('value',priceChangePercent);
+  const img1 = document.getElementById("img").setAttribute('value',img);
+  const v1 = document.getElementById("weightedAvgPrice").setAttribute('value',weightedAvgPrice);
+  // console.log(symbol1);
+  // symbol1.value=symbol
+
+
+  const parent = document.querySelector("#id03");
+  parent.style.display = "block";
+  const row = document.querySelector(".pop-up-form");
+
+  }
+
+  function update() {
+    const id1 = document.getElementById("id").value
+    const symbol = document.getElementById("Symbel").value;
+    const quoteVolume = document.getElementById("valume").value;
+    const highprice = document.getElementById("highPrice").value;
+    const lastPrice = document.getElementById("lastPrice").value;
+    const Percent = document.getElementById("percent").value;
+    const img = document.getElementById("img").value;
+    const weightedAvgPrice = document.getElementById("weightedAvgPrice").value;
+   
+  
+    let check = localStorage.getItem("CCI");
+    let array2 = [];
+    let obj;
+    for (let index = 0; index < check.length; index++) {
+      if(check[index].id==id){
+         array2 = JSON.parse(localStorage.getItem("CCI"));
+         
+         obj = {
+           id:id1,
+          symbol: symbol,
+          img: img,
+          highPrice: highprice,
+          lastPrice: lastPrice,
+          priceChangePercent: Percent,
+          weightedAvgPrice: weightedAvgPrice,
+          quoteVolume: quoteVolume,
+        };
+        array2[index] = (obj);
+        localStorage.setItem("CCI", JSON.stringify(array2));
+        alert("You added ..." + symbol +" ....");
+      }
+      
+    }
+      if (check) {
+        array2 = JSON.parse(localStorage.getItem("NCCI"));
+        obj = {
+          symbol: symbol,
+          img: img,
+          highPrice: highprice,
+          lastPrice: lastPrice,
+          priceChangePercent: Percent,
+          weightedAvgPrice: weightedAvgPrice,
+          quoteVolume: quoteVolume,
+        };
+        array2.push(obj);
+        localStorage.setItem("NCCI", JSON.stringify(array2));
+        alert("You added ..." + symbol +" ....");
+      } else
+        obj = {
+          symbol: symbol,
+          img: img,
+          highPrice: highprice,
+          lastPrice: lastPrice,
+          priceChangePercent: Percent,
+          weightedAvgPrice: weightedAvgPrice,
+          quoteVolume: quoteVolume,
+        };
+      array2.push(obj);
+      localStorage.setItem("NCCI", JSON.stringify(array2));
+      alert("You added ..." + symbol +" ....");
+  
+    }
 function remove() {}
